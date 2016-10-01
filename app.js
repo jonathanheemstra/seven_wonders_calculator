@@ -1,3 +1,3 @@
 'use strict';
 
-alert('working');
+console.log('it\'s working');
