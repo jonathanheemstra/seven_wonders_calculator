@@ -1,0 +1,21 @@
+body {
+  max-width: 960px;
+  margin: 3% auto;
+}
+form {
+  max-width: 45%;
+  margin: 0 auto;
+  float: left;
+  display: inline-block;
+}
+#final_score {
+  max-width: 45%;
+  display: inline-block;
+  margin-left: 5%;
+}
+button {
+  padding: 20px 50px;
+  margin: 10px auto;
+  border-radius: 5px;
+  display: inherit;
+}
