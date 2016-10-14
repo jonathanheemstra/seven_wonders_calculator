@@ -1,16 +1,17 @@
 body {
-  width: 960px;
-  margin: 0 auto;
+  max-width: 960px;
+  margin: 3% auto;
 }
 form {
-  max-width: 50%;
+  max-width: 45%;
   margin: 0 auto;
   float: left;
   display: inline-block;
 }
 #final_score {
-  max-width: 50%;
+  max-width: 45%;
   display: inline-block;
+  margin-left: 5%;
 }
 button {
   padding: 20px 50px;

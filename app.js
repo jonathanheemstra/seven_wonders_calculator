@@ -3,8 +3,10 @@
 var userScore = document.getElementById('user_scores');
 var printUserScore = document.getElementById('final_score');
 var players = [];
+var scores = [];
+var points = ['Players', 'Military', 'Money', 'Wonder', 'Civic', 'Commerce', 'Guild', 'Science', 'Final Score'];
 
-var Score = function (userName, militaryScoreNegative, militaryScorePositive, moneyScore, wonderScore, civicScore, commerceScore, guildScore, scienceScore, scienceScoreColleciton) {
+function Score (userName, militaryScoreNegative, militaryScorePositive, moneyScore, wonderScore, civicScore, commerceScore, guildScore, scienceScore, scienceScoreColleciton) {
   this.userName = userName;
   this.militaryScorePositive = militaryScorePositive;
   this.militaryScoreNegative = militaryScoreNegative * -1;
@@ -19,9 +21,11 @@ var Score = function (userName, militaryScoreNegative, militaryScorePositive, mo
   this.scienceScoreColleciton = scienceScoreColleciton;
   this.scienceScoreFinal = 0;
   this.finalPlayerScore = 0;
+  this.playerScore = [];
   this.calcMilitaryScore();
   this.calcScienceScore();
   this.calcFinalPlayerScore();
+  this.createPlayerScoreArray();
   players.push(this);
 };
 Score.prototype.calcMilitaryScore = function () {
@@ -40,26 +44,28 @@ Score.prototype.calcScienceScore = function () {
   }
   this.scienceScoreFinal += this.scienceScoreColleciton * 7;
 };
+Score.prototype.createPlayerScoreArray = function () {
+  this.playerScore.push(this.userName, this.militaryScoreFinal, this.moneyScore, this.wonderScore, this.civicScore, this.commerceScore, this.guildScore, this.scienceScoreFinal, this.finalPlayerScore);
+  scores.push(this.playerScore);
+};
 
-
-function renderUserScores2 (element,content,attach) {
+function renderElements (element,content,attach) {
   var el = document.createElement(element);
   el.textContent = content;
   document.getElementById(attach).appendChild(el);
 }
 
-
-function renderUserScores () {
-  printUserScore.innerHTML = '';
-  for (var i = 0; i < players.length; i++) {
-    renderUserScores2('div','','final_score');
-    var ulEl = document.createElement('ul');
-    var liEl = document.createElement('li');
-    liEl.textContent = players[i].userName;
-    ulEl.appendChild(liEl);
-    divEl.appendChild(ulEl);
-    printUserScore.appendChild(divEl);
+function renderUserScores() {
+  for (var i = 0; i < points.length; i++) {
+    var trEl = document.createElement('tr');
+    // var column1 = document.createElement('td');
+    // column1.textContent = points[i];
+    var userScores = document.createElement('td');
+    userScores.textContent = scores[i];
+    // trEl.appendChild(column1);
+    trEl.appendChild(userScores);
   }
+  printUserScore.appendChild(trEl);
 }
 
 function calcUserScore (event) {
@@ -99,6 +105,7 @@ function calcUserScore (event) {
   event.target.sets.value = 0;
   event.target.name.value = null;
 
+  printUserScore.innerHTML = '';
   renderUserScores();
 }
 
